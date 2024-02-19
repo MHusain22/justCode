@@ -16,10 +16,13 @@ app.use(
     origin: "http://localhost:3000", // Replace with your frontend URL
   })
 );
-app.use(express.static('build'));
-app.use((req,res,next) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.use(express.static(path.join(__dirname,'./client/build')));
+app.get('*',function(req,res) {
+  res.sendFile(path.join(__dirname,"./client/build/index.html"));
 })
+// app.use((req,res,next) => {
+//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// })
 app.use(bodyParser.json());
 //we cannot do app.listen so
 const server = http.createServer(app);
